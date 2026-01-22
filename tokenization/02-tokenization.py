@@ -1,6 +1,7 @@
 import nltk
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+from pprint import pprint
 
 
 if __name__ == "__main__":
@@ -26,15 +27,27 @@ if __name__ == "__main__":
         return [word for word in tokens if word.isalnum()]
 
     preprocessed_docs = [" ".join(preprocess(doc)) for doc in documents]
-    print(preprocessed_docs)
+    pprint(preprocessed_docs)
 
     vectorizer = TfidfVectorizer()
     tfidf_matrix = vectorizer.fit_transform(preprocessed_docs)
-    print(tfidf_matrix)
+    pprint(tfidf_matrix)
 
     query = "machine learning"
-    query_vector = vectorizer.transform([query])
-    print(query_vector)
 
-    similarities = cosine_similarity(tfidf_matrix, query_vector).flatten()
-    print(similarities)
+    def search_tfidf(query, vectorizer, tfidf_matrix):
+        query_vector = vectorizer.transform([query])
+        similarities = cosine_similarity(tfidf_matrix, query_vector).flatten()
+        sorted_similarities = sorted(
+            list(enumerate(similarities)), key=lambda x: x[1], reverse=True
+        )
+
+        return sorted_similarities
+
+    search_similarities = search_tfidf(query, vectorizer, tfidf_matrix)
+    pprint(search_similarities)
+
+    print(f"top 10 documentos por score de similaridade {query}:")
+    for doc_index, score in search_similarities[:10]:
+        print(f"documento {doc_index}: {documents[doc_index]}")
+
