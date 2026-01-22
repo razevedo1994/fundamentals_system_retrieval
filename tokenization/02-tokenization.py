@@ -50,4 +50,3 @@ if __name__ == "__main__":
     print(f"top 10 documentos por score de similaridade {query}:")
     for doc_index, score in search_similarities[:10]:
         print(f"documento {doc_index}: {documents[doc_index]}")
-
