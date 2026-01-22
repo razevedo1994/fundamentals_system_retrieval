@@ -24,7 +24,7 @@ if __name__ == "__main__":
         tokens = nltk.word_tokenize(text_lower)
 
         return [word for word in tokens if word.isalnum()]
-    
+
     preprocessed_docs = [" ".join(preprocess(doc)) for doc in documents]
     print(preprocessed_docs)
 
@@ -38,4 +38,3 @@ if __name__ == "__main__":
 
     similarities = cosine_similarity(tfidf_matrix, query_vector).flatten()
     print(similarities)
-

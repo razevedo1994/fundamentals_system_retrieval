@@ -2,7 +2,6 @@ import nltk
 
 
 if __name__ == "__main__":
-
     nltk.download("punkt_tab")
 
     text = "Machine learning é um campo da inteligência artificial que permite que computadores aprendam padrões a partir de dados. Sem serem programados explicitamente para cada tarefa."
@@ -16,7 +15,6 @@ if __name__ == "__main__":
     def preprocess(input: list[str]):
         tokens = nltk.word_tokenize(input.lower())
         return [word for word in tokens if word.isalnum()]
-    
 
     documents = [
         "Machine learning é o aprendizado automático de máquinas a partir de dados.",
@@ -26,4 +24,3 @@ if __name__ == "__main__":
 
     preprocessed_docs = [" ".join(preprocess(doc)) for doc in documents]
     print(preprocessed_docs)
-    
