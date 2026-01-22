@@ -8,4 +8,5 @@ dependencies = [
     "nltk>=3.9.2",
     "ruff>=0.14.13",
     "scikit-learn>=1.8.0",
+    "whoosh>=2.7.4",
 ]
